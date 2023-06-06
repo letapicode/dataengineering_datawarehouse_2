@@ -1,9 +1,7 @@
-Data Engineering Report: Sparkify Data Warehouse and ETL Pipeline
----------------------------------------------------------------------------------------------------
+# Data Engineering Report: Sparkify Data Warehouse and ETL Pipeline
 
 
-Introduction
------------------
+## Introduction
 Sparkify, a popular music streaming startup, has been experiencing rapid growth in its user base 
 and song library. To better understand user behavior and preferences, Sparkify has collected log 
 data and song metadata in JSON format. The company's data engineering team was tasked with designing 
@@ -13,8 +11,7 @@ This report details the design, implementation, and testing of a scalable and ma
 warehouse using Amazon Redshift and an ETL pipeline using Python.
 
 
-Project Overview
-------------------------
+## Project Overview
 The primary goals of this project were to:
 
 Design and implement a scalable and maintainable data warehouse on Amazon Redshift to store 
@@ -30,11 +27,9 @@ AWS Identity and Access Management (IAM): To manage access permissions for Redsh
 the data stored in Amazon S3.
 
 
-Data Insights
--------------------
+## Data Insights
 
-The staging_events table:
---
+### The staging_events table:
 The staging_events columns include artist, auth, firstName, gender, itemInSession, lastName, length, 
 level, location, method, page, registration, sessionId, song, status, ts, userAgent, and userId. 
 These columns contain various information about user interactions, such as playing or skipping a song, 
@@ -86,8 +81,7 @@ searching for a new song, or upgrading to a paid subscription.
 - userId: This column contains a unique identifier for each user associated with the event.
 
 
-The staging_songs table:
---
+## The staging_songs table:
 The staging_songs columns include song_id, num_songs, title, artist_name, artist_latitude, year, duration, 
 artist_id, artist_longitude, and artist_location. These columns contain information about the songs and 
 artists available in the Sparkify library.
@@ -113,21 +107,18 @@ artists available in the Sparkify library.
 - artist_location: This column contains the location of the artist, such as a city and state.
 
 
-Data Warehouse Design
-----------------------------------
+## Data Warehouse Design
 A star schema design was chosen for the data warehouse due to its simplicity, performance advantages, 
 and ease of use for analytical queries. The schema consists of a central fact table surrounded by dimension tables.
 
 
-Fact table:
---
+## Fact table:
 songplays: Stores records of each song play event, including details about the user, song, artist, and timestamp.
     
     {songplay_id, start_time, user_id,level, song_id, artist_id, session_id, location, user_agent}
 
 
-Dimension tables:
---
+## Dimension tables:
 users: Stores information about users, such as user ID, first name, last name, gender, and level.
 
     {user_id, first_name, last_name, gender, level}
@@ -147,8 +138,7 @@ time: Stores timestamps of song play events, broken down into hour, day, week, m
 
 
 
-ETL Pipeline
-------------------
+## ETL Pipeline
 The ETL pipeline was designed to extract raw data from Amazon S3, stage the data 
 in Redshift, and transform it into the star schema. The pipeline was implemented 
 using Python and consists of the following steps:
@@ -161,8 +151,7 @@ Transform: Transform the data and insert it into the fact and dimension tables. 
 Load: Load the transformed data into the data warehouse's fact and dimension tables.
 
 
-Testing and Validation
--------------------------------
+## Testing and Validation
 To ensure data integrity and the accuracy of the ETL pipeline, extensive testing was 
 performed throughout the development process:
 
@@ -177,8 +166,7 @@ Performance: Test query performance on the data warehouse to ensure that the sch
 
 
 
-Example Queries
---
+## Example Queries
 The data warehouse facilitates a wide range of analytical queries, such as:
 
 Most played songs: Identify the most popular songs by counting the number of plays for each song.
@@ -188,8 +176,7 @@ User demographics: Analyze user demographics by aggregating data on gender, loca
 
 Here are a few example queries, to see results, please run the etl.py file:
 
-Most Played Songs
---
+## Most Played Songs
 SELECT s.title, a.name, COUNT(*) as play_count
 
 FROM songplays sp
@@ -206,8 +193,7 @@ LIMIT 10;
 
 
 
-Peak Usage Hours
---
+## Peak Usage Hours
 SELECT t.hour, COUNT(*) as play_count
 
 FROM songplays sp
@@ -219,8 +205,7 @@ GROUP BY t.hour
 ORDER BY play_count DESC;
 
 
-User Demographics
---
+## User Demographics
 SELECT u.gender, u.level, COUNT(DISTINCT u.user_id) as user_count
 
 FROM songplays sp
@@ -235,8 +220,7 @@ ORDER BY user_count DESC;
 These queries provide valuable insights into user behavior and preferences, enabling Sparkify to 
 make data-driven decisions and improve its services.
 
-Conclusion
-----------------
+## Conclusion
 In this project, I successfully designed and implemented a scalable and maintainable data warehouse 
 on Amazon Redshift and an ETL pipeline using Python. The star schema design facilitates efficient querying, 
 while the ETL pipeline ensures data consistency and integrity.
@@ -245,7 +229,7 @@ The data warehouse enables Sparkify to analyze user behavior and preferences, ma
 and enhance its services. As the company continues to grow, the data warehouse and ETL pipeline can be 
 easily scaled to handle increased data volumes and user activity.
 
-# ---   ...   ---   ...   ***   ...   ***   ...   ***   ...   ---   ...   --- 
+## 
 
 # A Day in the Life of a Sparkify User: The Data Story
 
