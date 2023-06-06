@@ -1,4 +1,4 @@
-# Data Engineering Report: Sparkify Data Warehouse and ETL Pipeline
+# Sparkify Data Warehouse and ETL Pipeline
 
 
 ## Introduction
